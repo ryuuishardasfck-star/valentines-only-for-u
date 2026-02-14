@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Valentine's Day!</title>
+
+<style>
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(to bottom, #ffcccc, #ff8da1);
+    color: #800000;
+    text-align: center;
+    margin: 0;
+    padding: 20px;
+    overflow-x: hidden; /* allow vertical scroll */
+}
+
+h1 {
+    font-size: 2em;
+    animation: fadeIn 2s ease-in;
+}
+
+/* PHOTO */
+.photo {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 5px solid white;
+    box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    margin-top: 10px;
+}
+
+/* LETTER */
+.letter {
+    max-width: 600px;
+    margin: 20px auto;
+    background: rgba(255,255,255,0.95);
+    padding: 20px;
+    border-radius: 15px;
+    font-size: 1.1em;
+    min-height: 160px;
+}
+
+/* typing cursor */
+#typingText::after {
+    content: "|";
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    50% {opacity: 0;}
+}
+
+/* BUTTONS */
+.buttons {
+    margin-top: 20px;
+}
+
+button {
+    font-size: 1.1em;
+    padding: 10px 18px;
+    border-radius: 25px;
+    border: none;
+    margin: 8px;
+    cursor: pointer;
+}
+
+.yes-btn {
+    background: #ff4d6d;
+    color: white;
+}
+
+.no-btn {
+    background: #ddd;
+}
+
+/* FLOATING HEARTS BACKGROUND */
+.bg-heart {
+    position: fixed;
+    top: 100vh;
+    font-size: 20px;
+    animation: floatUp 8s linear infinite;
+    opacity: 0.5;
+}
+
+@keyframes floatUp {
+    0% {transform: translateY(0);}
+    100% {transform: translateY(-120vh);}
+}
+
+/* falling hearts when YES */
+@keyframes fall {
+    to {
+        transform: translateY(100vh);
+        opacity: 0;
+    }
+}
+
+footer {
+    margin-top: 30px;
+    font-size: 0.8em;
+}
+
+/* hide youtube */
+iframe {
+    display: none;
+}
+</style>
+</head>
+
+<body>
+
+<h1>Happy Valentine's Day, My Love 💖</h1>
+
+<img src="your-photo.jpg" class="photo">
+
+<div class="letter">
+    <p id="typingText"></p>
+</div>
+
+<div class="buttons">
+    <button class="yes-btn" onclick="sayYes()">YES 💖</button>
+    <button class="no-btn" id="noBtn" onmouseover="moveNo()">NO 💔</button>
+</div>
+
+<footer>Made with love just for you 💕</footer>
+
+<!-- background floating hearts -->
+<script>
+for (let i = 0; i < 15; i++) {
+    let heart = document.createElement("div");
+    heart.innerHTML = "💖";
+    heart.className = "bg-heart";
+    heart.style.left = Math.random()*100 + "vw";
+    heart.style.animationDuration = (5 + Math.random()*5) + "s";
+    document.body.appendChild(heart);
+}
+</script>
+
+<!-- YOUTUBE PLAYER -->
+<iframe id="ytPlayer"
+src="https://www.youtube.com/embed/PLrd-rILKtc?enablejsapi=1"
+allow="autoplay"></iframe>
+
+<script>
+
+// 💌 message
+const message = `Dear Ms. Balila,
+
+From the moment I met you, everything felt different.
+You make my world brighter, my heart happier, and my life more meaningful.
+
+You are my best friend, my safe place, and the love of my life.
+
+Will you be my Valentine — today, tomorrow, and forever?
+
+With all my love,
+Alexcis ❤️`;
+
+let i = 0;
+function typeWriter() {
+    if (i < message.length) {
+        document.getElementById("typingText").innerHTML += message.charAt(i);
+        i++;
+        setTimeout(typeWriter, 35);
+    }
+}
+window.onload = typeWriter;
+
+// YES CLICK
+function sayYes() {
+    alert("YAY!! I LOVE YOU SO MUCH 💖🥰");
+
+    const player = document.getElementById("ytPlayer");
+    player.src = "https://www.youtube.com/embed/PLrd-rILKtc?autoplay=1&loop=1&playlist=PLrd-rILKtc";
+
+    // falling hearts burst
+    for (let i = 0; i < 40; i++) {
+        let heart = document.createElement("div");
+        heart.innerHTML = "💖";
+        heart.style.position = "fixed";
+        heart.style.left = Math.random()*100 + "vw";
+        heart.style.top = "-20px";
+        heart.style.fontSize = "20px";
+        heart.style.animation = "fall 3s linear";
+        document.body.appendChild(heart);
+        setTimeout(()=> heart.remove(), 3000);
+    }
+}
+
+// NO BUTTON RUN
+function moveNo() {
+    const btn = document.getElementById("noBtn");
+    btn.style.position = "absolute";
+    btn.style.left = Math.random()*80 + "vw";
+    btn.style.top = Math.random()*80 + "vh";
+}
+</script>
+
+</body>
+</html>
